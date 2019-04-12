@@ -10,13 +10,27 @@ namespace DotNetRazorPages.Models
     public class Movie
     {
         public int ID { get; set; }
+        [StringLength(60, MinimumLength = 3)]
+        [Required]
         public string Title { set; get; }
 
         [Display(Name = "Release Date")]
         [DataType(DataType.Date)]
         public DateTime ReleaseDate { get; set; }
+
+        [RegularExpression(@"^[A-Z]+[a-zA-Z""'\s-]*$")]
+        [Required]
+        [StringLength(30)]
         public string Genre { set; get; }
-        [Column(TypeName ="decima(18, 2)")]
+
+        [Range(1, 100)]
+        [DataType(DataType.Currency)]
+        [Column(TypeName ="decimal(18, 2)")]
         public decimal Price { get; set; }
+
+        [RegularExpression(@"^[A-Z]+[a-zA-Z0-9""'\s-]*$")]
+        [StringLength(5)]
+        [Required]
+        public string Rating { get; set; }
     }
 }
